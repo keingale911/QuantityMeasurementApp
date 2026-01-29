@@ -1,52 +1,68 @@
 package com.apps.quantitymeasurement;
 
+import java.util.Objects;
+
 public class Length {
 
     private double value;
     private LengthUnit unit;
 
-    public enum LengthUnit{
+    public enum LengthUnit {
         FEET(12.0),
-        INCHES(1.0);
+        INCHES(1.0),
+        YARD(36.0),
+        CENTIMETER(0.393701);
 
         private final double conversionFactor;
 
-        LengthUnit(double conversionFactor){
-            this.conversionFactor=conversionFactor;
+        LengthUnit(double conversionFactor) {
+            this.conversionFactor = conversionFactor;
         }
 
-        public double getConversionFactor()
-        {
+        public double getConversionFactor() {
             return conversionFactor;
         }
     }
 
-    public Length(double value, LengthUnit unit){
-        this.value=value;
-        this.unit=unit;
+    public Length(double value, LengthUnit unit) {
+        this.value = value;
+        this.unit = unit;
     }
 
-    private double convertToBaseUnit(){
-        return value*unit.getConversionFactor();
+    private double convertToBaseUnit() {
+        double inche = value * unit.getConversionFactor();
+        return Math.round(inche * 100.0) / 100.0;
     }
 
-    public boolean compare(Length that){
-        return Double.compare(this.convertToBaseUnit(), that.convertToBaseUnit())==0;
+    public boolean compare(Length that) {
+        return Double.compare(this.convertToBaseUnit(), that.convertToBaseUnit()) == 0;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (obj == null) return false;
+        if (obj == null || obj.getClass() != getClass()) return false;
 
         Length other = (Length) obj;
         return compare(other);
     }
 
-    public static void main(String[] args) {
-        Length ft=new Length(1.0,LengthUnit.FEET);
-        Length in=new Length(12.0,LengthUnit.INCHES);
+    @Override
+    public int hashCode(){
+        return Objects.hash(convertToBaseUnit());
+    }
 
-        System.out.println("Are both equals = "+ft.equals(in));
+    public static void main(String[] args) {
+        Length ft = new Length(1.0, LengthUnit.FEET);
+        Length in = new Length(12.0, LengthUnit.INCHES);
+        System.out.println("Are both(Feet & Inches) equals = " + ft.equals(in));
+
+        Length yd = new Length(1.0, LengthUnit.YARD);
+        Length inyd = new Length(36.0, LengthUnit.INCHES);
+        System.out.println("Are both(Yard & Inches) equals = " + yd.equals(inyd));
+
+        Length cm = new Length(100.0, LengthUnit.CENTIMETER);
+        Length incm = new Length(39.3701, LengthUnit.INCHES);
+        System.out.println("Are both(Centimeter & Inches) equals = " + cm.equals(incm));
     }
 }
