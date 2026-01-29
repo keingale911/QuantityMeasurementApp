@@ -73,5 +73,17 @@ public class QuantityMeasurementApp {
     public static void main(String[] args) {
         demonstrateInchesEqulity();
         demonstrateFeetEqulity();
+        demonstrateFeetInchesEqulity();
+    }
+
+    private static void demonstrateFeetInchesEqulity() {
+        Length ft = new Length(2.0,Length.LengthUnit.FEET);
+        Length in = new Length(24.0,Length.LengthUnit.INCHES);
+
+        System.out.println("Feet equals inches = "+ demonstrateLengthEqulity(ft,in));
+    }
+
+    private static boolean demonstrateLengthEqulity(Length ft, Length in) {
+        return ft.equals(in);
     }
 }

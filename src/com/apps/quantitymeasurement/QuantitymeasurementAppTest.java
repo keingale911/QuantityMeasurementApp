@@ -82,4 +82,61 @@ public class QuantitymeasurementAppTest {
 
         assertEquals(in1, in1);
     }
+
+    //Test cases for Length
+    @Test
+    public void testFeetEquality() {
+        Length f1 = new Length(1.0,Length.LengthUnit.FEET);
+        Length f2 = new Length(1.0,Length.LengthUnit.FEET);
+
+        assertEquals(f1, f2);
+    }
+
+    @Test
+    public void testInchesEquality() {
+        Length in1 = new Length(12.0,Length.LengthUnit.INCHES);
+        Length in2 = new Length(12.0,Length.LengthUnit.INCHES);
+
+        assertEquals(in1, in2);
+    }
+
+    @Test
+    public void testFeetInchesComparison() {
+        Length ft = new Length(2.0,Length.LengthUnit.FEET);
+        Length in = new Length(24.0,Length.LengthUnit.INCHES);
+
+        assertEquals(ft, in);
+    }
+
+    @Test
+    public void testFeetInequality() {
+        Length ft1 = new Length(1.0,Length.LengthUnit.FEET);
+        Length ft2 = new Length(2.0,Length.LengthUnit.FEET);
+
+        assertNotEquals(ft1, ft2);
+    }
+
+    @Test
+    public void testInchesInequality() {
+        Length ft1 = new Length(12.0,Length.LengthUnit.INCHES);
+        Length ft2 = new Length(24.0,Length.LengthUnit.INCHES);
+
+        assertNotEquals(ft1, ft2);
+    }
+
+    @Test
+    public void testCrossUnitInequality() {
+        Length ft1 = new Length(12.0,Length.LengthUnit.INCHES);
+        Length ft2 = new Length(2.0,Length.LengthUnit.FEET);
+
+        assertNotEquals(ft1, ft2);
+    }
+
+    @Test
+    public void testMultiFeetComparison() {
+        Length ft1 = new Length(3.0,Length.LengthUnit.FEET);
+        Length ft2 = new Length(2.0,Length.LengthUnit.FEET);
+
+        assertNotEquals(ft1, ft2);
+    }
 }
