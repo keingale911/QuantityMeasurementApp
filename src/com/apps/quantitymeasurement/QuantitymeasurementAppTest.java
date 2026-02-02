@@ -139,4 +139,45 @@ public class QuantitymeasurementAppTest {
 
         assertNotEquals(ft1, ft2);
     }
+
+    //Test cases for Yard and Centimeter
+    @Test
+    public void yardEquals36Inches() {
+        Length yd = new Length(1.0,Length.LengthUnit.YARD);
+        Length in = new Length(36.0,Length.LengthUnit.INCHES);
+
+        assertEquals(yd, in);
+    }
+
+    @Test
+    public void centimeterEquals39Point3701Inches() {
+        Length in = new Length(39.3701,Length.LengthUnit.INCHES);
+        Length cm = new Length(100.0,Length.LengthUnit.CENTIMETER);
+
+        assertEquals(cm, in);
+    }
+
+    @Test
+    public void threeFeetEqualsOneYard() {
+        Length ft = new Length(3.0,Length.LengthUnit.FEET);
+        Length yd = new Length(1.0,Length.LengthUnit.YARD);
+
+        assertEquals(ft, yd);
+    }
+
+    @Test
+    public void thrityPoint48CmEqualsOneFeet() {
+        Length cm = new Length(30.48,Length.LengthUnit.CENTIMETER);
+        Length ft = new Length(1.0,Length.LengthUnit.FEET);
+
+        assertEquals(cm, ft);
+    }
+
+    @Test
+    public void yardNotEqualsToInches() {
+        Length yd = new Length(1.0,Length.LengthUnit.YARD);
+        Length in = new Length(12.0,Length.LengthUnit.INCHES);
+
+        assertNotEquals(yd, in);
+    }
 }
