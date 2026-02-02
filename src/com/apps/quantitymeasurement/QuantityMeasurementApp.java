@@ -73,10 +73,10 @@ public class QuantityMeasurementApp {
     public static void main(String[] args) {
         demonstrateInchesEqulity();
         demonstrateFeetEqulity();
-        demonstrateFeetInchesEqulity();
+        demonstrateFeetInchesComparison();
     }
 
-    private static void demonstrateFeetInchesEqulity() {
+    private static void demonstrateFeetInchesComparison() {
         Length ft = new Length(2.0,Length.LengthUnit.FEET);
         Length in = new Length(24.0,Length.LengthUnit.INCHES);
 
