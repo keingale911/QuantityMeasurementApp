@@ -1,0 +1,142 @@
+package com.apps.quantitymeasurement;
+
+import com.apps.quantitymeasurement.QuantityMeasurementApp.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class QuantitymeasurementAppTest {
+
+    //Test cases for feet
+    @Test
+    public void testFeetEquality_SameValue() {
+        Feet f1 = new Feet(1.5);
+        Feet f2 = new Feet(1.5);
+
+        assertEquals(f1, f2);
+    }
+
+    @Test
+    public void testFeetEquality_DiffValue() {
+        Feet f1 = new Feet(1.5);
+        Feet f2 = new Feet(2.5);
+
+        assertNotEquals(f1, f2);
+    }
+
+    @Test
+    public void testFeetEquality_NullValue() {
+        Feet f1 = new Feet(1.5);
+
+        assertNotEquals(f1, null);
+    }
+
+    @Test
+    public void testFeetEquality_DiffObjValue() {
+        Feet f1 = new Feet(1.5);
+
+        assertNotEquals(f1, new Inches(24.0));
+    }
+
+    @Test
+    public void testFeetEquality_SameRefValue() {
+        Feet f1 = new Feet(1.5);
+
+        assertEquals(f1, f1);
+    }
+
+    //Test cases for Inches
+    @Test
+    public void testInchesEquality_SameValue() {
+        Inches in1 = new Inches(12.0);
+        Inches in2 = new Inches(12.0);
+
+        assertEquals(in1, in2);
+    }
+
+    @Test
+    public void testInchesEquality_DiffValue() {
+        Inches in1 = new Inches(12.0);
+        Inches in2 = new Inches(24.0);
+
+        assertNotEquals(in1, in2);
+    }
+
+    @Test
+    public void testInchesEquality_NullValue() {
+        Inches in1 = new Inches(12.0);
+
+        assertNotEquals(in1, null);
+    }
+
+    @Test
+    public void testInchesEquality_DiffObjValue() {
+        Inches in1 = new Inches(12.0);
+
+        assertNotEquals(in1, new Feet(2.0));
+    }
+
+    @Test
+    public void testInchesEquality_SameRefValue() {
+        Inches in1 = new Inches(12.0);
+
+        assertEquals(in1, in1);
+    }
+
+    //Test cases for Length
+    @Test
+    public void testFeetEquality() {
+        Length f1 = new Length(1.0,Length.LengthUnit.FEET);
+        Length f2 = new Length(1.0,Length.LengthUnit.FEET);
+
+        assertEquals(f1, f2);
+    }
+
+    @Test
+    public void testInchesEquality() {
+        Length in1 = new Length(12.0,Length.LengthUnit.INCHES);
+        Length in2 = new Length(12.0,Length.LengthUnit.INCHES);
+
+        assertEquals(in1, in2);
+    }
+
+    @Test
+    public void testFeetInchesComparison() {
+        Length ft = new Length(2.0,Length.LengthUnit.FEET);
+        Length in = new Length(24.0,Length.LengthUnit.INCHES);
+
+        assertEquals(ft, in);
+    }
+
+    @Test
+    public void testFeetInequality() {
+        Length ft1 = new Length(1.0,Length.LengthUnit.FEET);
+        Length ft2 = new Length(2.0,Length.LengthUnit.FEET);
+
+        assertNotEquals(ft1, ft2);
+    }
+
+    @Test
+    public void testInchesInequality() {
+        Length ft1 = new Length(12.0,Length.LengthUnit.INCHES);
+        Length ft2 = new Length(24.0,Length.LengthUnit.INCHES);
+
+        assertNotEquals(ft1, ft2);
+    }
+
+    @Test
+    public void testCrossUnitInequality() {
+        Length ft1 = new Length(12.0,Length.LengthUnit.INCHES);
+        Length ft2 = new Length(2.0,Length.LengthUnit.FEET);
+
+        assertNotEquals(ft1, ft2);
+    }
+
+    @Test
+    public void testMultiFeetComparison() {
+        Length ft1 = new Length(3.0,Length.LengthUnit.FEET);
+        Length ft2 = new Length(2.0,Length.LengthUnit.FEET);
+
+        assertNotEquals(ft1, ft2);
+    }
+}
