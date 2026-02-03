@@ -2,6 +2,8 @@ package com.apps.quantitymeasurement;
 
 import com.apps.quantitymeasurement.QuantityMeasurementApp.*;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -180,4 +182,44 @@ public class QuantitymeasurementAppTest {
 
         assertNotEquals(yd, in);
     }
+
+    @ParameterizedTest
+    @EnumSource(Length.LengthUnit.class)
+    public void referenceEqualitySameObject(Length.LengthUnit unit) {
+        Length length = new Length(1.0,unit);
+
+        assertEquals(length, length);
+    }
+
+    @ParameterizedTest
+    @EnumSource(Length.LengthUnit.class)
+    public void equalsReturnsFalseForNull(Length.LengthUnit unit) {
+        Length length = new Length(1.0, unit);
+
+        assertNotEquals(length, null);
+    }
+
+    @Test
+    public void refexivSymmetricTransitiveProperty() {
+
+    }
+
+    @ParameterizedTest
+    @EnumSource(Length.LengthUnit.class)
+    public void differentValuesSameUnitNotEquals(Length.LengthUnit unit) {
+        Length length1 = new Length(12.0,unit);
+        Length length2 = new Length(1.0,unit);
+
+        assertNotEquals(length1, length2);
+    }
+
+    /*@ParameterizedTest
+    @EnumSource(Length.LengthUnit.class)
+    public static void crossUnitEqualityDemonstrateMethod(double value1, Length.LengthUnit unit1, double value2, Length.LengthUnit unit2) {
+//        Length length1 = new Length(12.0,unit1);
+//        Length length2 = new Length(1.0,unit1);
+        boolean rs= QuantityMeasurementApp.demonstrateLengthComparison(value1,unit1,value2,unit2);
+
+        assertTrue(rs);
+    }*/
 }

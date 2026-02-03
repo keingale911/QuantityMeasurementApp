@@ -81,8 +81,10 @@ public class QuantityMeasurementApp {
         demonstrateLengthComparison(30.48,Length.LengthUnit.CENTIMETER,1.0,Length.LengthUnit.FEET);
     }
 
-    private static void demonstrateLengthComparison(double value1, Length.LengthUnit lengthUnit1, double value2, Length.LengthUnit lengthUnit2) {
-        System.out.println(demonstrateLengthEqulity(new Length(value1,lengthUnit1),new Length(value2,lengthUnit2)));
+    public static boolean demonstrateLengthComparison(double value1, Length.LengthUnit lengthUnit1, double value2, Length.LengthUnit lengthUnit2) {
+        boolean rs= demonstrateLengthEqulity(new Length(value1,lengthUnit1),new Length(value2,lengthUnit2));
+        System.out.println(rs);
+        return rs;
     }
 
     private static void demonstrateFeetInchesComparison() {
