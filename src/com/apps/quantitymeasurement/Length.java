@@ -52,6 +52,26 @@ public class Length {
         return Objects.hash(convertToBaseUnit());
     }
 
+    public Length converTo(LengthUnit targetUnit){
+        if(targetUnit==null){
+            throw new IllegalArgumentException("Null not allowed, Please enter valid target unit");
+        }
+
+        double inches = convertToBaseUnit();
+        double convertToTarget = inches/targetUnit.getConversionFactor();
+        convertToTarget = Math.round(convertToTarget * 100.00)/100.0;
+
+        return new Length(convertToTarget, targetUnit);
+    }
+
+    @Override
+    public String toString() {
+        return "Length { " +
+                "value = " + value +
+                "  " + unit +
+                '}';
+    }
+
     public static void main(String[] args) {
         Length ft = new Length(1.0, LengthUnit.FEET);
         Length in = new Length(12.0, LengthUnit.INCHES);
@@ -64,5 +84,7 @@ public class Length {
         Length cm = new Length(100.0, LengthUnit.CENTIMETER);
         Length incm = new Length(39.3701, LengthUnit.INCHES);
         System.out.println("Are both(Centimeter & Inches) equals = " + cm.equals(incm));
+
+        System.out.println(ft.converTo(LengthUnit.YARD).toString());
     }
 }

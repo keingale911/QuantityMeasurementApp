@@ -74,11 +74,26 @@ public class QuantityMeasurementApp {
         demonstrateInchesEqulity();
         demonstrateFeetEqulity();
         demonstrateFeetInchesComparison();
+
         demonstrateLengthComparison(1.0,Length.LengthUnit.FEET,12.0,Length.LengthUnit.INCHES);
         demonstrateLengthComparison(1.0,Length.LengthUnit.YARD,36.0,Length.LengthUnit.INCHES);
         demonstrateLengthComparison(100.0,Length.LengthUnit.CENTIMETER,39.3701,Length.LengthUnit.INCHES);
         demonstrateLengthComparison(3.0,Length.LengthUnit.FEET,1.0,Length.LengthUnit.YARD);
         demonstrateLengthComparison(30.48,Length.LengthUnit.CENTIMETER,1.0,Length.LengthUnit.FEET);
+
+        demonstrateLengthConversion(3.281,Length.LengthUnit.FEET,Length.LengthUnit.CENTIMETER);
+    }
+
+    public static Length demonstrateLengthConversion(double value, Length.LengthUnit lengthUnitSrc, Length.LengthUnit lengthUnitTrg) {
+        Length ft = new Length(value,lengthUnitSrc);
+        Length lt=demonstrateLengthConversion(ft, lengthUnitTrg);
+        System.out.println(lt.toString());
+
+        return lt;
+    }
+
+    public static Length demonstrateLengthConversion(Length ft, Length.LengthUnit lengthUnitTrg) {
+        return ft.converTo(lengthUnitTrg);
     }
 
     public static boolean demonstrateLengthComparison(double value1, Length.LengthUnit lengthUnit1, double value2, Length.LengthUnit lengthUnit2) {
@@ -94,7 +109,7 @@ public class QuantityMeasurementApp {
         System.out.println("Feet equals inches = "+ demonstrateLengthEqulity(ft,in));
     }
 
-    private static boolean demonstrateLengthEqulity(Length ft, Length in) {
+    public static boolean demonstrateLengthEqulity(Length ft, Length in) {
         return ft.equals(in);
     }
 }

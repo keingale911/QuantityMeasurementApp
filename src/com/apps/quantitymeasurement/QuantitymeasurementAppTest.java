@@ -222,4 +222,22 @@ public class QuantitymeasurementAppTest {
 
         assertTrue(rs);
     }*/
+
+    //Test cases for Unit conversion
+    @Test
+    public void convertFeetToInches(){
+        Length inInches = QuantityMeasurementApp.demonstrateLengthConversion(2.0,Length.LengthUnit.FEET, Length.LengthUnit.INCHES);
+        Length expectedLength = new Length(24.0, Length.LengthUnit.INCHES);
+
+        assertTrue(QuantityMeasurementApp.demonstrateLengthEqulity(inInches, expectedLength));
+    }
+
+    @Test
+    public void convertYardToInchesUsingOverloadedMethod(){
+        Length inYard = new Length(2.0, Length.LengthUnit.YARD);
+        Length inInches = QuantityMeasurementApp.demonstrateLengthConversion(inYard, Length.LengthUnit.INCHES);
+        Length expectedLength = new Length(72.0, Length.LengthUnit.INCHES);
+
+        assertTrue(QuantityMeasurementApp.demonstrateLengthEqulity(inInches,expectedLength));
+    }
 }
