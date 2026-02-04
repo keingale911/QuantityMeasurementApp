@@ -201,7 +201,22 @@ public class QuantitymeasurementAppTest {
 
     @Test
     public void refexivSymmetricTransitiveProperty() {
+        Length feet = new Length(1.0,Length.LengthUnit.FEET);
+        Length inches = new Length(12.0,Length.LengthUnit.INCHES);
+        Length centimeter = new Length(30.48,Length.LengthUnit.CENTIMETER);
+        Length yard = new Length(0.3333,Length.LengthUnit.YARD);
 
+        //Reflexive
+        assertEquals(centimeter, centimeter);
+
+        //Symmetric
+        assertEquals(feet, inches);
+        assertEquals(inches, feet);
+
+        //Transitive
+        assertEquals(feet, inches);
+        assertEquals(inches, centimeter);
+        assertEquals(centimeter, yard);
     }
 
     @ParameterizedTest
@@ -213,13 +228,14 @@ public class QuantitymeasurementAppTest {
         assertNotEquals(length1, length2);
     }
 
-    /*@ParameterizedTest
-    @EnumSource(Length.LengthUnit.class)
-    public static void crossUnitEqualityDemonstrateMethod(double value1, Length.LengthUnit unit1, double value2, Length.LengthUnit unit2) {
-//        Length length1 = new Length(12.0,unit1);
-//        Length length2 = new Length(1.0,unit1);
-        boolean rs= QuantityMeasurementApp.demonstrateLengthComparison(value1,unit1,value2,unit2);
+    @Test
+    public void crossUnitEqualityDemonstrateMethod() {
 
-        assertTrue(rs);
-    }*/
+        assertAll(()->assertTrue( QuantityMeasurementApp.demonstrateLengthComparison(1.0,Length.LengthUnit.FEET,12.0,Length.LengthUnit.INCHES)),
+                ()->assertTrue( QuantityMeasurementApp.demonstrateLengthComparison(1.0,Length.LengthUnit.YARD,36.0,Length.LengthUnit.INCHES)),
+                ()->assertTrue( QuantityMeasurementApp.demonstrateLengthComparison(100.0,Length.LengthUnit.CENTIMETER,39.3701,Length.LengthUnit.INCHES)),
+                ()->assertTrue( QuantityMeasurementApp.demonstrateLengthComparison(3.0,Length.LengthUnit.FEET,1.0,Length.LengthUnit.YARD)),
+                ()->assertTrue( QuantityMeasurementApp.demonstrateLengthComparison(30.48,Length.LengthUnit.CENTIMETER,1.0,Length.LengthUnit.FEET)),
+                ()->assertTrue( QuantityMeasurementApp.demonstrateLengthComparison(1.0,Length.LengthUnit.YARD,91.44,Length.LengthUnit.CENTIMETER)));
+    }
 }
