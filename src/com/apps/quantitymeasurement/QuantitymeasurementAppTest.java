@@ -240,4 +240,14 @@ public class QuantitymeasurementAppTest {
 
         assertTrue(QuantityMeasurementApp.demonstrateLengthEqulity(inInches,expectedLength));
     }
+
+    //Test case for 2 Length value addition
+    @Test
+    public void addFeetAndInches(){
+        Length l1Feet = new Length(2.0, Length.LengthUnit.FEET);
+        Length l2Inches = new Length(12.0, Length.LengthUnit.INCHES);
+        Length addedLength= QuantityMeasurementApp.demonstrateLengthAddition(l1Feet,l2Inches);
+        Length expectedLength = new Length(3.0, Length.LengthUnit.FEET);
+        assertTrue(QuantityMeasurementApp.demonstrateLengthEqulity(addedLength,expectedLength));
+    }
 }

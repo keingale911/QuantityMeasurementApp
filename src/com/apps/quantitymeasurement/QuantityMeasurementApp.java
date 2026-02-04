@@ -82,6 +82,16 @@ public class QuantityMeasurementApp {
         demonstrateLengthComparison(30.48,Length.LengthUnit.CENTIMETER,1.0,Length.LengthUnit.FEET);
 
         demonstrateLengthConversion(3.281,Length.LengthUnit.FEET,Length.LengthUnit.CENTIMETER);
+
+        demonstrateLengthAddition(new Length(2.12, Length.LengthUnit.FEET),new Length(12.0, Length.LengthUnit.INCHES));
+    }
+
+    public static Length demonstrateLengthAddition(Length length, Length that) {
+
+        Length sumLength= length.add(that);
+        System.out.println("Addition of 2 length values = "+sumLength.add(that).toString());
+
+        return sumLength;
     }
 
     public static Length demonstrateLengthConversion(double value, Length.LengthUnit lengthUnitSrc, Length.LengthUnit lengthUnitTrg) {

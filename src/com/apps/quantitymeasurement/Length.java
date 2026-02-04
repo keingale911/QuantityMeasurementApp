@@ -37,6 +37,21 @@ public class Length {
     public boolean compare(Length that) {
         return Double.compare(this.convertToBaseUnit(), that.convertToBaseUnit()) == 0;
     }
+    
+    public Length add(Length that){
+        if(that==null){
+            throw new IllegalArgumentException("Null is not allowed here  ");
+        }
+        Length convertedLength=convertFromBaseToTargetUnit(this,that);
+        
+        double additionOfTwoLength= this.value + convertedLength.value;
+        
+        return new Length(additionOfTwoLength, this.unit);
+    }
+
+    private Length convertFromBaseToTargetUnit(Length length, Length that) {
+        return that.converTo(this.unit);
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -86,5 +101,7 @@ public class Length {
         System.out.println("Are both(Centimeter & Inches) equals = " + cm.equals(incm));
 
         System.out.println(ft.converTo(LengthUnit.YARD).toString());
+
+        System.out.println("addition of 2 length value = "+ft.add(in).toString());
     }
 }
