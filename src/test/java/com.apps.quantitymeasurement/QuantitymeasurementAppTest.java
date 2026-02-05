@@ -1,6 +1,8 @@
-package com.apps.quantitymeasurement;
+package test.java.com.apps.quantitymeasurement;
 
-import com.apps.quantitymeasurement.QuantityMeasurementApp.*;
+import main.java.com.apps.quantitymeasurement.QuantityMeasurementApp.*;
+import main.java.com.apps.quantitymeasurement.Length;
+import main.java.com.apps.quantitymeasurement.QuantityMeasurementApp;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;

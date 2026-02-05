@@ -1,4 +1,4 @@
-package com.apps.quantitymeasurement;
+package main.java.com.apps.quantitymeasurement;
 
 public class QuantityMeasurementApp {
 
