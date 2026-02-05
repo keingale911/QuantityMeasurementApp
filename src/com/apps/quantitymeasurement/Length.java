@@ -24,42 +24,64 @@ public class Length {
         }
     }
 
+    //Class para constructor
+    //@Param --> double
+    //@Param --> Enum Unit
     public Length(double value, LengthUnit unit) {
         this.value = value;
         this.unit = unit;
     }
 
-    //This method will convert value into base unit value
+    //This method will convert value into base unit value and round off 2 decimal
+    //@Return <-- double
     private double convertToBaseUnit() {
         double inche = value * unit.getConversionFactor();
         return Math.round(inche * 100.0) / 100.0;
     }
 
+    //Here we are checking 2 length objects
+    //@Param --> LengthObj1
+    //@Return <-- boolean
     public boolean compare(Length that) {
         return Double.compare(this.convertToBaseUnit(), that.convertToBaseUnit()) == 0;
     }
-    
+
+    //Addition of 2 length values and return converted in 1st object unit
+    //@Param --> LengthObj1
+    //@Return <-- LengthObj
     public Length add(Length that){
         if(that==null){
             throw new IllegalArgumentException("Null is not allowed here  ");
         }
-        Length convertedLength=convertFromBaseToTargetUnit(this,that);
+        Length convertedLength = convertFromBaseToTargetUnit(this,that);
         
         double additionOfTwoLength= this.value + convertedLength.value;
         
         return new Length(additionOfTwoLength, this.unit);
     }
 
+    //This method will do both operations(Addition and conversion into target unit) and return length
+    //@Param --> LengthObj1
+    //@Param --> Enum Unit
+    //@Return <-- LengthObj
     public Length addAndConvert(Length secondLength, LengthUnit lengthUnit) {
         return this.add(secondLength, lengthUnit);
     }
 
+    //Addition and conversion into target unit and return Length obj
+    //@Param --> LengthObj1
+    //@Param --> Enum Unit
+    //@Return <-- LengthObj
     private Length add(Length secondLength, LengthUnit targethUnit) {
         Length commonLength = this.add(secondLength);
 
         return commonLength.converTo(targethUnit);
     }
 
+    //Convert value into 1st obj unit
+    //@Param -- LengthObj1
+    //@Param -- LengthObj2
+    //@Return -- LengthObj
     private Length convertFromBaseToTargetUnit(Length length, Length that) {
         return that.converTo(this.unit);
     }
@@ -78,6 +100,7 @@ public class Length {
         return Objects.hash(convertToBaseUnit());
     }
 
+    //Convert value from one unit into another (Inches -> Feet)
     public Length converTo(LengthUnit targetUnit){
         if(targetUnit==null){
             throw new IllegalArgumentException("Null not allowed, Please enter valid target unit");

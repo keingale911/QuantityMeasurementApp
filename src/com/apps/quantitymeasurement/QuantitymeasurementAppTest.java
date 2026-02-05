@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class QuantitymeasurementAppTest {
 
-    //Test cases for feet
+    //Test cases for feet UC1
     @Test
     public void testFeetEquality_SameValue() {
         Feet f1 = new Feet(1.5);
@@ -47,7 +47,7 @@ public class QuantitymeasurementAppTest {
         assertEquals(f1, f1);
     }
 
-    //Test cases for Inches
+    //Test cases for Inches UC2
     @Test
     public void testInchesEquality_SameValue() {
         Inches in1 = new Inches(12.0);
@@ -85,7 +85,7 @@ public class QuantitymeasurementAppTest {
         assertEquals(in1, in1);
     }
 
-    //Test cases for Length
+    //Test cases for Length UC3
     @Test
     public void testFeetEquality() {
         Length f1 = new Length(1.0,Length.LengthUnit.FEET);
@@ -142,7 +142,7 @@ public class QuantitymeasurementAppTest {
         assertNotEquals(ft1, ft2);
     }
 
-    //Test cases for Yard and Centimeter
+    //Test cases for Yard and Centimeter UC4
     @Test
     public void yardEquals36Inches() {
         Length yd = new Length(1.0,Length.LengthUnit.YARD);
@@ -239,7 +239,7 @@ public class QuantitymeasurementAppTest {
                 ()->assertTrue( QuantityMeasurementApp.demonstrateLengthComparison(1.0,Length.LengthUnit.YARD,91.44,Length.LengthUnit.CENTIMETER)));
     }
 
-    //Test cases for Unit conversion
+    //Test cases for Unit conversion UC5
     @Test
     public void convertFeetToInches(){
         Length inInches = QuantityMeasurementApp.demonstrateLengthConversion(2.0,Length.LengthUnit.FEET, Length.LengthUnit.INCHES);
@@ -257,7 +257,7 @@ public class QuantitymeasurementAppTest {
         assertTrue(QuantityMeasurementApp.demonstrateLengthEqulity(inInches,expectedLength));
     }
 
-    //Test case for 2 Length value addition
+    //Test case for 2 Length value addition UC6
     @Test
     public void addFeetAndInches(){
         Length l1Feet = new Length(2.0, Length.LengthUnit.FEET);
@@ -267,6 +267,7 @@ public class QuantitymeasurementAppTest {
         assertTrue(QuantityMeasurementApp.demonstrateLengthEqulity(addedLength,expectedLength));
     }
 
+    //Test case to add 2 Length values and convert it into target unit UC7
     @Test
     public void addFeetAndInchesWithTargetUnitInches(){
         Length l1Feet = new Length(1.0, Length.LengthUnit.FEET);
