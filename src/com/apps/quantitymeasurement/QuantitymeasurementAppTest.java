@@ -266,4 +266,15 @@ public class QuantitymeasurementAppTest {
         Length expectedLength = new Length(3.0, Length.LengthUnit.FEET);
         assertTrue(QuantityMeasurementApp.demonstrateLengthEqulity(addedLength,expectedLength));
     }
+
+    @Test
+    public void addFeetAndInchesWithTargetUnitInches(){
+        Length l1Feet = new Length(1.0, Length.LengthUnit.FEET);
+        Length l2Inches = new Length(12.0, Length.LengthUnit.INCHES);
+        Length addedLength= QuantityMeasurementApp.demonstrateLengthAddition(l1Feet,l2Inches, Length.LengthUnit.INCHES);
+        Length expectedLength = new Length(24.0, Length.LengthUnit.INCHES);
+
+        assertTrue(QuantityMeasurementApp.demonstrateLengthEqulity(addedLength,expectedLength));
+        assertEquals(addedLength,expectedLength);
+    }
 }

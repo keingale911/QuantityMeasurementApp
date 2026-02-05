@@ -84,6 +84,14 @@ public class QuantityMeasurementApp {
         demonstrateLengthConversion(3.281,Length.LengthUnit.FEET,Length.LengthUnit.CENTIMETER);
 
         demonstrateLengthAddition(new Length(2.12, Length.LengthUnit.FEET),new Length(12.0, Length.LengthUnit.INCHES));
+
+        demonstrateLengthAddition(new Length(2.0, Length.LengthUnit.FEET),new Length(12.0, Length.LengthUnit.INCHES),Length.LengthUnit.YARD);
+    }
+
+    public static Length demonstrateLengthAddition(Length length, Length secondLength, Length.LengthUnit targetUnit) {
+        Length convertedAdd = length.addAndConvert(secondLength,targetUnit);
+        System.out.println("Addition of 2 length values in target Unit = "+convertedAdd.toString());
+        return convertedAdd;
     }
 
     public static Length demonstrateLengthAddition(Length length, Length that) {

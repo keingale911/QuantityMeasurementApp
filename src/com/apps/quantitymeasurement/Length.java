@@ -29,6 +29,7 @@ public class Length {
         this.unit = unit;
     }
 
+    //This method will convert value into base unit value
     private double convertToBaseUnit() {
         double inche = value * unit.getConversionFactor();
         return Math.round(inche * 100.0) / 100.0;
@@ -47,6 +48,16 @@ public class Length {
         double additionOfTwoLength= this.value + convertedLength.value;
         
         return new Length(additionOfTwoLength, this.unit);
+    }
+
+    public Length addAndConvert(Length secondLength, LengthUnit lengthUnit) {
+        return this.add(secondLength, lengthUnit);
+    }
+
+    private Length add(Length secondLength, LengthUnit targethUnit) {
+        Length commonLength = this.add(secondLength);
+
+        return commonLength.converTo(targethUnit);
     }
 
     private Length convertFromBaseToTargetUnit(Length length, Length that) {
@@ -88,7 +99,7 @@ public class Length {
     }
 
     public static void main(String[] args) {
-        Length ft = new Length(1.0, LengthUnit.FEET);
+        Length ft = new Length(2.0, LengthUnit.FEET);
         Length in = new Length(12.0, LengthUnit.INCHES);
         System.out.println("Are both(Feet & Inches) equals = " + ft.equals(in));
 
@@ -100,8 +111,10 @@ public class Length {
         Length incm = new Length(39.3701, LengthUnit.INCHES);
         System.out.println("Are both(Centimeter & Inches) equals = " + cm.equals(incm));
 
-        System.out.println(ft.converTo(LengthUnit.YARD).toString());
+        System.out.println(ft.converTo(LengthUnit.CENTIMETER).toString());
 
         System.out.println("addition of 2 length value = "+ft.add(in).toString());
+
+        System.out.println("addition of 2 length value and converted = "+ft.addAndConvert(in,Length.LengthUnit.YARD).toString());
     }
 }
