@@ -1,4 +1,6 @@
-package main.java.com.apps.quantitymeasurement;
+package main.java.com.apps.quantitymeasurement.service;
+
+import main.java.com.apps.quantitymeasurement.constants.LengthUnit;
 
 import java.util.Objects;
 
@@ -6,23 +8,6 @@ public class Length {
 
     private double value;
     private LengthUnit unit;
-
-    public enum LengthUnit {
-        FEET(12.0),
-        INCHES(1.0),
-        YARD(36.0),
-        CENTIMETER(0.393701);
-
-        private final double conversionFactor;
-
-        LengthUnit(double conversionFactor) {
-            this.conversionFactor = conversionFactor;
-        }
-
-        public double getConversionFactor() {
-            return conversionFactor;
-        }
-    }
 
     //Class para constructor
     //@Param --> double
@@ -138,6 +123,6 @@ public class Length {
 
         System.out.println("addition of 2 length value = "+ft.add(in).toString());
 
-        System.out.println("addition of 2 length value and converted = "+ft.addAndConvert(in,Length.LengthUnit.YARD).toString());
+        System.out.println("addition of 2 length value and converted = "+ft.addAndConvert(in,LengthUnit.YARD).toString());
     }
 }
