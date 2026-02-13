@@ -1,5 +1,8 @@
 package main.java.com.apps.quantitymeasurement;
 
+import main.java.com.apps.quantitymeasurement.constants.LengthUnit;
+import main.java.com.apps.quantitymeasurement.service.Length;
+
 public class QuantityMeasurementApp {
 
     public static class Feet {
@@ -75,20 +78,20 @@ public class QuantityMeasurementApp {
         demonstrateFeetEqulity();
         demonstrateFeetInchesComparison();
 
-        demonstrateLengthComparison(1.0,Length.LengthUnit.FEET,12.0,Length.LengthUnit.INCHES);
-        demonstrateLengthComparison(1.0,Length.LengthUnit.YARD,36.0,Length.LengthUnit.INCHES);
-        demonstrateLengthComparison(100.0,Length.LengthUnit.CENTIMETER,39.3701,Length.LengthUnit.INCHES);
-        demonstrateLengthComparison(3.0,Length.LengthUnit.FEET,1.0,Length.LengthUnit.YARD);
-        demonstrateLengthComparison(30.48,Length.LengthUnit.CENTIMETER,1.0,Length.LengthUnit.FEET);
+        demonstrateLengthComparison(1.0,LengthUnit.FEET,12.0,LengthUnit.INCHES);
+        demonstrateLengthComparison(1.0,LengthUnit.YARD,36.0,LengthUnit.INCHES);
+        demonstrateLengthComparison(100.0,LengthUnit.CENTIMETER,39.3701,LengthUnit.INCHES);
+        demonstrateLengthComparison(3.0,LengthUnit.FEET,1.0,LengthUnit.YARD);
+        demonstrateLengthComparison(30.48,LengthUnit.CENTIMETER,1.0,LengthUnit.FEET);
 
-        demonstrateLengthConversion(3.281,Length.LengthUnit.FEET,Length.LengthUnit.CENTIMETER);
+        demonstrateLengthConversion(3.281,LengthUnit.FEET,LengthUnit.CENTIMETER);
 
-        demonstrateLengthAddition(new Length(2.12, Length.LengthUnit.FEET),new Length(12.0, Length.LengthUnit.INCHES));
+        demonstrateLengthAddition(new Length(2.12, LengthUnit.FEET),new Length(12.0, LengthUnit.INCHES));
 
-        demonstrateLengthAddition(new Length(2.0, Length.LengthUnit.FEET),new Length(12.0, Length.LengthUnit.INCHES),Length.LengthUnit.YARD);
+        demonstrateLengthAddition(new Length(2.0, LengthUnit.FEET),new Length(12.0, LengthUnit.INCHES),LengthUnit.YARD);
     }
 
-    public static Length demonstrateLengthAddition(Length length, Length secondLength, Length.LengthUnit targetUnit) {
+    public static Length demonstrateLengthAddition(Length length, Length secondLength, LengthUnit targetUnit) {
         Length convertedAdd = length.addAndConvert(secondLength,targetUnit);
         System.out.println("Addition of 2 length values in target Unit = "+convertedAdd.toString());
         return convertedAdd;
@@ -102,7 +105,7 @@ public class QuantityMeasurementApp {
         return sumLength;
     }
 
-    public static Length demonstrateLengthConversion(double value, Length.LengthUnit lengthUnitSrc, Length.LengthUnit lengthUnitTrg) {
+    public static Length demonstrateLengthConversion(double value, LengthUnit lengthUnitSrc, LengthUnit lengthUnitTrg) {
         Length ft = new Length(value,lengthUnitSrc);
         Length lt=demonstrateLengthConversion(ft, lengthUnitTrg);
         System.out.println(lt.toString());
@@ -110,19 +113,19 @@ public class QuantityMeasurementApp {
         return lt;
     }
 
-    public static Length demonstrateLengthConversion(Length ft, Length.LengthUnit lengthUnitTrg) {
-        return ft.converTo(lengthUnitTrg);
+    public static Length demonstrateLengthConversion(Length ft, LengthUnit lengthUnitTrg) {
+        return new Length(ft.lengthUnit.convertFromBaseUnit(ft.value,lengthUnitTrg), lengthUnitTrg);
     }
 
-    public static boolean demonstrateLengthComparison(double value1, Length.LengthUnit lengthUnit1, double value2, Length.LengthUnit lengthUnit2) {
+    public static boolean demonstrateLengthComparison(double value1, LengthUnit lengthUnit1, double value2, LengthUnit lengthUnit2) {
         boolean rs= demonstrateLengthEqulity(new Length(value1,lengthUnit1),new Length(value2,lengthUnit2));
         System.out.println(rs);
         return rs;
     }
 
     private static void demonstrateFeetInchesComparison() {
-        Length ft = new Length(2.0,Length.LengthUnit.FEET);
-        Length in = new Length(24.0,Length.LengthUnit.INCHES);
+        Length ft = new Length(2.0,LengthUnit.FEET);
+        Length in = new Length(24.0,LengthUnit.INCHES);
 
         System.out.println("Feet equals inches = "+ demonstrateLengthEqulity(ft,in));
     }
