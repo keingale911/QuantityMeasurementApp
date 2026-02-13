@@ -2,7 +2,7 @@ package test.java.com.apps.quantitymeasurement;
 
 import main.java.com.apps.quantitymeasurement.QuantityMeasurementApp.*;
 import main.java.com.apps.quantitymeasurement.service.Length;
-import main.java.com.apps.quantitymeasurement.QuantityMeasurementApp;
+import main.java.com.apps.quantitymeasurement.*;
 import main.java.com.apps.quantitymeasurement.constants.LengthUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -107,8 +107,8 @@ public class QuantitymeasurementAppTest {
 
     @Test
     public void testFeetInchesComparison() {
-        Length ft = new Length(2.0,LengthUnit.FEET);
-        Length in = new Length(24.0,LengthUnit.INCHES);
+        Length ft = new Length(1.0,LengthUnit.FEET);
+        Length in = new Length(12.0,LengthUnit.INCHES);
 
         assertEquals(ft, in);
     }
@@ -159,7 +159,7 @@ public class QuantitymeasurementAppTest {
         Length in = new Length(39.3701,LengthUnit.INCHES);
         Length cm = new Length(100.0,LengthUnit.CENTIMETER);
 
-        assertEquals(cm, in);
+        assertEquals(in, cm);
     }
 
     @Test

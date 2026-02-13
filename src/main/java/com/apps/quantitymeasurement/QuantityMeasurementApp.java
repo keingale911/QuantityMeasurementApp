@@ -114,7 +114,7 @@ public class QuantityMeasurementApp {
     }
 
     public static Length demonstrateLengthConversion(Length ft, LengthUnit lengthUnitTrg) {
-        return ft.converTo(lengthUnitTrg);
+        return new Length(ft.lengthUnit.convertFromBaseUnit(ft.value,lengthUnitTrg), lengthUnitTrg);
     }
 
     public static boolean demonstrateLengthComparison(double value1, LengthUnit lengthUnit1, double value2, LengthUnit lengthUnit2) {
