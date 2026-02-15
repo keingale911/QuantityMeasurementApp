@@ -23,6 +23,9 @@ public enum WeightUnit {
         return Math.round(gram * 100.0) / 100.0;
     }
 
-    public static void main(String[] args) {
+    public double convertFromBaseUnit(double value, WeightUnit l1) {
+        double gram = value * this.getConversionFactor();
+        double convertToTarget = gram / l1.getConversionFactor();
+        return Math.round(convertToTarget * 100.0) / 100.0;
     }
 }
