@@ -1,7 +1,9 @@
 package main.java.com.apps.quantitymeasurement;
 
 import main.java.com.apps.quantitymeasurement.constants.LengthUnit;
+import main.java.com.apps.quantitymeasurement.constants.WeightUnit;
 import main.java.com.apps.quantitymeasurement.service.Length;
+import main.java.com.apps.quantitymeasurement.service.Weight;
 
 public class QuantityMeasurementApp {
 
@@ -59,21 +61,9 @@ public class QuantityMeasurementApp {
         System.out.println(f3.equals(inch));
     }
 
-    public static void demonstrateInchesEqulity() {
-        Inches f1 = new Inches(24.0);
-        Inches f2 = new Inches(11.5);
-        Inches f3 = new Inches(12.0);
-        Feet ft = new Feet(2.0);
-
-        System.out.println(f1.equals(f3));
-        System.out.println(f2.equals(f1));
-        System.out.println(f3.equals(f1));
-        System.out.println(f3.equals(null));
-        System.out.println(f3.equals(f3));
-        System.out.println(f3.equals(ft));
-    }
-
     public static void main(String[] args) {
+
+        //Length operations
         demonstrateInchesEqulity();
         demonstrateFeetEqulity();
         demonstrateFeetInchesComparison();
@@ -89,6 +79,88 @@ public class QuantityMeasurementApp {
         demonstrateLengthAddition(new Length(2.12, LengthUnit.FEET),new Length(12.0, LengthUnit.INCHES));
 
         demonstrateLengthAddition(new Length(2.0, LengthUnit.FEET),new Length(12.0, LengthUnit.INCHES),LengthUnit.YARD);
+
+        //Weight Operations
+        Weight kg = new Weight(1.0, WeightUnit.KILOGRAM);
+        Weight gm = new Weight(1000.0, WeightUnit.GRAM);
+
+        System.out.println("Is 1 kg == 1000 gm = "+demonstrateWeightEqulity(kg, gm));
+        demonstrateWeightComparison(1.0, WeightUnit.TONNE, 1000.0, WeightUnit.KILOGRAM);
+        demonstrateWeightConversion(10.0, WeightUnit.KILOGRAM, WeightUnit.GRAM);
+
+        demonstrateWeightAddition(new Weight(2.0, WeightUnit.POUND), new Weight(1.0, WeightUnit.TONNE));
+        demonstrateWeightAddition(new Weight(2000.0, WeightUnit.GRAM), new Weight(1.0, WeightUnit.TONNE), WeightUnit.KILOGRAM);
+
+    }
+
+    /*Addition of two weigth and default converter into first Weight unit
+    @Param -Weight first Weight
+    @Param -weight second weight1
+    @Param -WeightUnit e.i result of addition in which unit converting into
+     */
+    private static void demonstrateWeightAddition(Weight weight, Weight weight1, WeightUnit weightUnitTrg) {
+        System.out.println("Addition of 2 weight and converted = "+weight.addAndConvert(weight1, weightUnitTrg).toString());
+    }
+
+    /*Addition of two weigth and default converter into first Weight unit
+    @Param -Weight first Weight in which we are getting result
+    @Param -weight second weight
+     */
+    private static void demonstrateWeightAddition(Weight weight1, Weight weight2) {
+        System.out.println(weight1.add(weight2).toString());
+    }
+
+    /*Here coversion will happen from one unit into another
+    @Param -waight value
+    @Param -weight unit
+    @Param -conversion target unit
+     */
+    private static void demonstrateWeightConversion(double v, WeightUnit weightUnit, WeightUnit trgWeightUnit) {
+        Weight convertedWeight = demonstrateWeightConversion(new Weight(v, weightUnit), trgWeightUnit);
+        System.out.println("Converted weight = "+convertedWeight.toString());
+    }
+
+    /*this method is calling to unit conversion
+    @Param -weight to pass current weight value
+    @Param -WeightUnit as target unit
+    @Return -Weight returning converted weight
+     */
+    private static Weight demonstrateWeightConversion(Weight weight, WeightUnit trgWeightUnit) {
+        return new Weight(weight.weightUnit.convertFromBaseUnit(weight.value, trgWeightUnit), trgWeightUnit);
+    }
+
+    /* here we are checking 2 weight
+    @Param -first weight value
+    @Param -first weight unit
+    @Param -second weight value
+    @Param -second weight unit
+     */
+    private static void demonstrateWeightComparison(double v, WeightUnit weightUnit, double v1, WeightUnit weightUnit1) {
+        System.out.println("Here we are checking the two weights are equals or not = "+demonstrateWeightEqulity(new Weight(v, weightUnit),new Weight(v1, weightUnit1)));
+    }
+
+    /* check two weight units and return boolean
+    @Param -first weight unit
+    @Param -Second weight unit
+    @Return -true if both are equals otherwise false
+     */
+    private static boolean demonstrateWeightEqulity(Weight kg, Weight gm) {
+        return kg.equals(gm);
+    }
+
+    //functions for Length operations
+    public static void demonstrateInchesEqulity() {
+        Inches f1 = new Inches(24.0);
+        Inches f2 = new Inches(11.5);
+        Inches f3 = new Inches(12.0);
+        Feet ft = new Feet(2.0);
+
+        System.out.println(f1.equals(f3));
+        System.out.println(f2.equals(f1));
+        System.out.println(f3.equals(f1));
+        System.out.println(f3.equals(null));
+        System.out.println(f3.equals(f3));
+        System.out.println(f3.equals(ft));
     }
 
     public static Length demonstrateLengthAddition(Length length, Length secondLength, LengthUnit targetUnit) {

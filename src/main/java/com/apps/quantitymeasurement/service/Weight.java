@@ -23,11 +23,6 @@ public class Weight {
         return compare(other);
     }
 
-    @Override
-    public int hashCode(){
-        return Objects.hash(weightUnit.convertToBaseUnit(this.value));
-    }
-
     public boolean compare(Weight that) {
         return Double.compare(this.weightUnit.convertToBaseUnit(this.value),
                 that.weightUnit.convertToBaseUnit(that.value)) == 0;
@@ -53,6 +48,8 @@ public class Weight {
         Weight pn=new Weight(100.0, WeightUnit.POUND);
         System.out.println("kg + Pound = "+ kgm.add(pn).toString());
 
+        System.out.println("500 gram in Kg ="+WeightUnit.GRAM.convertToBaseUnit(500));
+
 
         Weight klg=new Weight(10000.0, WeightUnit.KILOGRAM);
         Weight grm=new Weight(1000000.0, WeightUnit.GRAM);
@@ -60,7 +57,7 @@ public class Weight {
 
     }
 
-    private Weight addAndConvert(Weight weight2, WeightUnit weightTrgUnit) {
+    public Weight addAndConvert(Weight weight2, WeightUnit weightTrgUnit) {
         return add(weight2, weightTrgUnit);
     }
 
@@ -70,7 +67,7 @@ public class Weight {
         return new Weight(sumInBase.weightUnit.convertFromBaseUnit(sumInBase.value, weightTrgUnit), weightTrgUnit);
     }
 
-    private Weight add(Weight gm) {
+    public Weight add(Weight gm) {
 
         if (gm == null){
             throw new IllegalArgumentException("Please enter valid weight");
