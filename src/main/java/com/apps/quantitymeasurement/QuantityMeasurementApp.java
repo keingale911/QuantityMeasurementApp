@@ -80,7 +80,7 @@ public class QuantityMeasurementApp {
 
         demonstrateLengthAddition(new Length(2.0, LengthUnit.FEET),new Length(12.0, LengthUnit.INCHES),LengthUnit.YARD);
 
-        //Weight Operations
+        //Weight Operations UC9
         Weight kg = new Weight(1.0, WeightUnit.KILOGRAM);
         Weight gm = new Weight(1000.0, WeightUnit.GRAM);
 
@@ -98,16 +98,20 @@ public class QuantityMeasurementApp {
     @Param -weight second weight1
     @Param -WeightUnit e.i result of addition in which unit converting into
      */
-    private static void demonstrateWeightAddition(Weight weight, Weight weight1, WeightUnit weightUnitTrg) {
-        System.out.println("Addition of 2 weight and converted = "+weight.addAndConvert(weight1, weightUnitTrg).toString());
+    public static Weight demonstrateWeightAddition(Weight weight, Weight weight1, WeightUnit weightUnitTrg) {
+        Weight convertedAdd = weight.addAndConvert(weight1, weightUnitTrg);
+        System.out.println("Addition of 2 weight and converted = "+convertedAdd.toString());
+        return convertedAdd;
     }
 
-    /*Addition of two weigth and default converter into first Weight unit
+    /*Addition of two weight and default converter into first Weight unit
     @Param -Weight first Weight in which we are getting result
     @Param -weight second weight
      */
-    private static void demonstrateWeightAddition(Weight weight1, Weight weight2) {
-        System.out.println(weight1.add(weight2).toString());
+    public static Weight demonstrateWeightAddition(Weight weight1, Weight weight2) {
+        Weight add = weight1.add(weight2);
+        System.out.println(add.toString());
+        return add;
     }
 
     /*Here coversion will happen from one unit into another
@@ -125,7 +129,7 @@ public class QuantityMeasurementApp {
     @Param -WeightUnit as target unit
     @Return -Weight returning converted weight
      */
-    private static Weight demonstrateWeightConversion(Weight weight, WeightUnit trgWeightUnit) {
+    public static Weight demonstrateWeightConversion(Weight weight, WeightUnit trgWeightUnit) {
         return new Weight(weight.weightUnit.convertFromBaseUnit(weight.value, trgWeightUnit), trgWeightUnit);
     }
 
@@ -145,6 +149,7 @@ public class QuantityMeasurementApp {
     @Return -true if both are equals otherwise false
      */
     private static boolean demonstrateWeightEqulity(Weight kg, Weight gm) {
+        Length ft =new Length(1.0,LengthUnit.FEET);
         return kg.equals(gm);
     }
 

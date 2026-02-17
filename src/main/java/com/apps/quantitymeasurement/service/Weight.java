@@ -30,7 +30,7 @@ public class Weight {
 
     @Override
     public String toString() {
-        return "Length { " +
+        return "Weight { " +
                 "value = " + value +
                 "  " + weightUnit +
                 '}';

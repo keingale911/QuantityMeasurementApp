@@ -25,8 +25,8 @@ public enum WeightUnit {
 
     public double convertFromBaseUnit(double value, WeightUnit trgWeight) {
 
-        double inches = value * this.getConversionFactor();
-        double convertToTarget = inches / trgWeight.getConversionFactor();
+        double wt = value * this.getConversionFactor();
+        double convertToTarget = wt / trgWeight.getConversionFactor();
         return Math.round(convertToTarget * 100.0) / 100.0;
     }
 }
