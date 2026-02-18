@@ -10,6 +10,9 @@ public class Weight {
 
 
     public Weight(double value, WeightUnit weightUnit) {
+        if(weightUnit == null){
+            throw new IllegalArgumentException("Unit can't be null");
+        }
         this.value = value;
         this.weightUnit = weightUnit;
     }

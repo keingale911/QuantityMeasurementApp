@@ -149,7 +149,6 @@ public class QuantityMeasurementApp {
     @Return -true if both are equals otherwise false
      */
     private static boolean demonstrateWeightEqulity(Weight kg, Weight gm) {
-        Length ft =new Length(1.0,LengthUnit.FEET);
         return kg.equals(gm);
     }
 

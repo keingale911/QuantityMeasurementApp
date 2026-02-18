@@ -70,16 +70,32 @@ public class QuantitymeasurementAppTest {
         assertEquals(gm, kg);
     }
 
-    //Test 8 and 9 have to add here
-//    @Test
-//    public void testEquality_NullUnit(){
-//        Weight nkg=new Weight(1.0, null);
-//        Weight kg=new Weight(1.0, WeightUnit.KILOGRAM);
-//
-//        assertThrows(IllegalArgumentException.class,()->{new Weight(1.0, null).equals(kg);});
-//    }
+    @Test
+    public void testEquality_reflexiveSymmetricTransitiveProperty() {
+        Weight feet = new Weight(1.0,WeightUnit.KILOGRAM);
+        Weight inches = new Weight(1000.0,WeightUnit.GRAM);
+        Weight centimeter = new Weight(2.20462,WeightUnit.POUND);
+        Weight yard = new Weight(0.001,WeightUnit.TONNE);
+
+        //Reflexive
+        assertEquals(centimeter, centimeter);
+
+        //Symmetric
+        assertEquals(feet, inches);
+        assertEquals(inches, feet);
+
+        //Transitive
+        assertEquals(feet, inches);
+        assertEquals(inches, centimeter);
+        assertEquals(centimeter, yard);
+    }
 
     @Test
+    void testEquality_NullUnit() {
+        assertThrows(IllegalArgumentException.class, ()-> new Weight(1.0,null));
+    }
+
+        @Test
     public void testEquality_ZeroValue(){
         Weight gm=new Weight(0.0, WeightUnit.GRAM);
         Weight kg=new Weight(0.0, WeightUnit.KILOGRAM);
@@ -186,7 +202,7 @@ public class QuantitymeasurementAppTest {
         assertEquals(kgnGmAddition,expectedAddition);
     }
 
-    //Test case 22 not clear
+    //UC9 Test case 22 not clear
 
     @Test
     public void testAddition_CrossUnit_PoundPlusGKilogram(){
