@@ -13,6 +13,9 @@ public class Length {
     //@Param --> double
     //@Param --> Enum Unit
     public Length(double value, LengthUnit lengthUnit) {
+        if(lengthUnit == null){
+            throw new IllegalArgumentException("Unit can't be null");
+        }
         this.value = value;
         this.lengthUnit = lengthUnit;
     }
