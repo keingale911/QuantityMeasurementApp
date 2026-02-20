@@ -1,6 +1,8 @@
 package main.java.com.apps.quantitymeasurement.constants;
 
-public enum WeightUnit {
+import main.java.com.apps.quantitymeasurement.service.IMeasurable;
+
+public enum WeightUnit implements IMeasurable {
 
     MILLIGRAM(0.000001),
     GRAM(0.001),
@@ -24,5 +26,13 @@ public enum WeightUnit {
 
     public double convertFromBaseUnit(double value) {
         return Math.round((value / getConversionFactor()) * 100.0) / 100.0;
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public String getUnitName() {
+        return "";
     }
 }
