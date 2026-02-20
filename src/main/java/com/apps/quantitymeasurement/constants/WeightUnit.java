@@ -19,14 +19,10 @@ public enum WeightUnit {
     }
 
     public double convertToBaseUnit(double weight) {
-        double gram = weight * getConversionFactor();
-        return Math.round(gram * 100.0) / 100.0;
+        return Math.round((weight * getConversionFactor()) * 100.0) / 100.0;
     }
 
-    public double convertFromBaseUnit(double value, WeightUnit trgWeight) {
-
-        double wt = value * this.getConversionFactor();
-        double convertToTarget = wt / trgWeight.getConversionFactor();
-        return Math.round(convertToTarget * 100.0) / 100.0;
+    public double convertFromBaseUnit(double value) {
+        return Math.round((value / getConversionFactor()) * 100.0) / 100.0;
     }
 }

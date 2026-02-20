@@ -17,14 +17,10 @@ public enum LengthUnit {
     }
 
     public double convertToBaseUnit(double value) {
-        double inche = value * getConversionFactor();
-        return Math.round(inche * 100.0) / 100.0;
+        return Math.round((value * getConversionFactor()) * 100.0) / 100.0;
     }
 
-    public double convertFromBaseUnit(double value, LengthUnit l1) {
-
-        double inches = value * this.getConversionFactor();
-        double convertToTarget = inches / l1.getConversionFactor();
-        return Math.round(convertToTarget * 100.0) / 100.0;
+    public double convertFromBaseUnit(double value) {
+        return Math.round((value / getConversionFactor()) * 100.0) / 100.0;
     }
 }

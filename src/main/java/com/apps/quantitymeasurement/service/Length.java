@@ -20,13 +20,7 @@ public class Length {
         this.lengthUnit = lengthUnit;
     }
 
-    //refactored and moved to enum LengthUnit
-    //This method will convert value into base unit value and round off 2 decimal
-    //@Return <-- double
-//    private double convertToBaseUnit() {
-//        double inche = value * unit.getConversionFactor();
-//        return Math.round(inche * 100.0) / 100.0;
-//    }
+    //convertToBaseUnit() refactored and moved to enum LengthUnit
 
     //Here we are checking 2 length objects
     //@Param --> LengthObj1
@@ -47,9 +41,8 @@ public class Length {
         double inchesThat = thatLength.lengthUnit.convertToBaseUnit(thatLength.value);
         double sumInches = inchesThis + inchesThat;
 
-        double sumInThisUnit = sumInches / this.lengthUnit.getConversionFactor();
-        sumInThisUnit = Math.round(sumInThisUnit * 100.0) / 100.0;
-        return new Length(sumInThisUnit, this.lengthUnit);
+
+        return new Length(sumInches, LengthUnit.INCHES);
     }
 
     //This method will do both operations(Addition and conversion into target unit) and return length
@@ -68,17 +61,10 @@ public class Length {
     private Length add(Length secondLength, LengthUnit targethUnit) {
         Length commonLength = this.add(secondLength);
 
-        return new Length(commonLength.lengthUnit.convertFromBaseUnit(commonLength.value,targethUnit), targethUnit);
+        return new Length(targethUnit.convertFromBaseUnit(commonLength.value), targethUnit);
     }
 
-    //refactored and moved to enum LengthUnit
-    //Convert value into 1st obj unit
-    //@Param -- LengthObj1
-    //@Param -- LengthObj2
-    //@Return -- LengthObj
-//    private Length convertFromBaseToTargetUnit(Length length, Length that) {
-//        return that.converTo(this.lengthUnit);
-//    }
+    //convertFromBaseToTargetUnit() refactored and moved to enum LengthUnit
 
     @Override
     public boolean equals(Object obj) {
@@ -94,19 +80,7 @@ public class Length {
         return Objects.hash(lengthUnit.convertToBaseUnit(this.value));
     }
 
-    //refactored and moved to enum LengthUnit
-    //Convert value from one unit into another (Inches -> Feet)
-//    public Length converTo(LengthUnit targetUnit){
-//        if(targetUnit==null){
-//            throw new IllegalArgumentException("Null not allowed, Please enter valid target unit");
-//        }
-//
-//        double inches = lengthUnit.convertToBaseUnit(this.value);
-//        double convertToTarget = inches/targetUnit.getConversionFactor();
-//        convertToTarget = Math.round(convertToTarget * 100.00)/100.0;
-//
-//        return new Length(convertToTarget, targetUnit);
-//    }
+    //converTo() refactored and moved to enum LengthUnit
 
     @Override
     public String toString() {
@@ -129,11 +103,11 @@ public class Length {
         Length incm = new Length(39.3701, LengthUnit.INCHES);
         System.out.println("Are both(Centimeter & Inches) equals = " + cm.equals(incm));
 
-        System.out.println(ft.lengthUnit.convertFromBaseUnit(ft.value,LengthUnit.INCHES));
+        System.out.println(LengthUnit.INCHES.convertFromBaseUnit(ft.lengthUnit.convertToBaseUnit(ft.value)));
 
         System.out.println("This is converted into centimeter = "+LengthUnit.YARD.convertToBaseUnit(1.0));
 
-        System.out.println("This is converted into centimeter = "+LengthUnit.YARD.convertFromBaseUnit(1.0, LengthUnit.FEET));
+        System.out.println("This is converted into centimeter............. = "+LengthUnit.FEET.convertFromBaseUnit(12.0));
 
         System.out.println("addition of 2 length value = "+ft.add(in).toString());
 

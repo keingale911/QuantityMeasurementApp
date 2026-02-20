@@ -76,7 +76,7 @@ public class QuantityMeasurementApp {
 
         demonstrateLengthConversion(3.281,LengthUnit.FEET,LengthUnit.CENTIMETER);
 
-        demonstrateLengthAddition(new Length(2.12, LengthUnit.FEET),new Length(12.0, LengthUnit.INCHES));
+        demonstrateLengthAddition(new Length(1.0, LengthUnit.FEET),new Length(12.0, LengthUnit.INCHES));
 
         demonstrateLengthAddition(new Length(2.0, LengthUnit.FEET),new Length(12.0, LengthUnit.INCHES),LengthUnit.YARD);
 
@@ -130,7 +130,7 @@ public class QuantityMeasurementApp {
     @Return -Weight returning converted weight
      */
     public static Weight demonstrateWeightConversion(Weight weight, WeightUnit trgWeightUnit) {
-        return new Weight(weight.weightUnit.convertFromBaseUnit(weight.value, trgWeightUnit), trgWeightUnit);
+        return new Weight(trgWeightUnit.convertFromBaseUnit(weight.weightUnit.convertToBaseUnit(weight.value)), trgWeightUnit);
     }
 
     /* here we are checking 2 weight
@@ -176,7 +176,7 @@ public class QuantityMeasurementApp {
     public static Length demonstrateLengthAddition(Length length, Length that) {
 
         Length sumLength= length.add(that);
-        System.out.println("Addition of 2 length values = "+sumLength.add(that).toString());
+        System.out.println("Addition of 2 length values............ = "+sumLength.add(that).toString());
 
         return sumLength;
     }
@@ -190,7 +190,7 @@ public class QuantityMeasurementApp {
     }
 
     public static Length demonstrateLengthConversion(Length ft, LengthUnit lengthUnitTrg) {
-        return new Length(ft.lengthUnit.convertFromBaseUnit(ft.value,lengthUnitTrg), lengthUnitTrg);
+        return new Length(lengthUnitTrg.convertFromBaseUnit(ft.lengthUnit.convertToBaseUnit(ft.value)), lengthUnitTrg);
     }
 
     public static boolean demonstrateLengthComparison(double value1, LengthUnit lengthUnit1, double value2, LengthUnit lengthUnit2) {

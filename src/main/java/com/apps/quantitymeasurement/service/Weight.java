@@ -45,7 +45,7 @@ public class Weight {
 
         System.out.println("is Weight equals = "+ kg.equals(gm));
 
-        System.out.println("4000 Kg in tonne = "+WeightUnit.KILOGRAM.convertFromBaseUnit(4000.0,WeightUnit.TONNE));
+        System.out.println("4000 Kg in tonne = "+WeightUnit.TONNE.convertFromBaseUnit(4000.0));
 
         Weight kgm=new Weight(1000.0, WeightUnit.KILOGRAM);
         Weight pn=new Weight(100.0, WeightUnit.POUND);
@@ -67,7 +67,7 @@ public class Weight {
     private Weight add(Weight weight2, WeightUnit weightTrgUnit) {
         Weight sumInBase = add(weight2);
 
-        return new Weight(sumInBase.weightUnit.convertFromBaseUnit(sumInBase.value, weightTrgUnit), weightTrgUnit);
+        return new Weight(weightTrgUnit.convertFromBaseUnit(sumInBase.value), weightTrgUnit);
     }
 
     public Weight add(Weight gm) {
@@ -78,10 +78,8 @@ public class Weight {
 
         double thisGram = this.weightUnit.convertToBaseUnit(this.value);
         double thatGram = gm.weightUnit.convertToBaseUnit(gm.value);
-        double sumInGram = thisGram + thatGram;
+        double sumInKg = thisGram + thatGram;
 
-        double sumInThisUnit = sumInGram / this.weightUnit.getConversionFactor();
-        sumInThisUnit = Math.round(sumInThisUnit * 100.0) / 100.0;
-        return new Weight(sumInThisUnit, this.weightUnit);
+        return new Weight(sumInKg, WeightUnit.KILOGRAM);
     }
 }

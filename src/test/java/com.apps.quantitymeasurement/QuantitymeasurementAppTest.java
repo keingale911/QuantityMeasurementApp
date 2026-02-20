@@ -521,7 +521,7 @@ public class QuantitymeasurementAppTest {
         Length l1Feet = new Length(2.0, LengthUnit.FEET);
         Length l2Inches = new Length(12.0, LengthUnit.INCHES);
         Length addedLength= QuantityMeasurementApp.demonstrateLengthAddition(l1Feet,l2Inches);
-        Length expectedLength = new Length(3.0, LengthUnit.FEET);
+        Length expectedLength = new Length(36.0, LengthUnit.INCHES);
         assertTrue(QuantityMeasurementApp.demonstrateLengthEqulity(addedLength,expectedLength));
     }
 
