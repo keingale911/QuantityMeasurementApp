@@ -75,20 +75,20 @@ public class QuantityMeasurementApp {
 
         demonstrateLengthConversion(3.281,LengthUnit.FEET,LengthUnit.CENTIMETER);
 
-        demonstrateLengthAddition(new Quentity<LengthUnit>(1.0, LengthUnit.FEET),new Quentity<LengthUnit>(12.0, LengthUnit.INCHES));
+        demonstrateLengthAddition(new Quentity<>(1.0, LengthUnit.FEET),new Quentity<>(12.0, LengthUnit.INCHES));
 
-        demonstrateLengthAddition(new Quentity<LengthUnit>(2.0, LengthUnit.FEET),new Quentity<LengthUnit>(12.0, LengthUnit.INCHES),LengthUnit.YARD);
+        demonstrateLengthAddition(new Quentity<>(2.0, LengthUnit.FEET),new Quentity<>(12.0, LengthUnit.INCHES),LengthUnit.YARD);
 
         //Quentity<WeightUnit> Operations UC9
-        Quentity<WeightUnit> kg = new Quentity<WeightUnit>(1.0, WeightUnit.KILOGRAM);
-        Quentity<WeightUnit> gm = new Quentity<WeightUnit>(1000.0, WeightUnit.GRAM);
+        Quentity<WeightUnit> kg = new Quentity<>(1.0, WeightUnit.KILOGRAM);
+        Quentity<WeightUnit> gm = new Quentity<>(1000.0, WeightUnit.GRAM);
 
         System.out.println("Is 1 kg == 1000 gm generic check ..............= "+demonstrateWeightEqulity(kg, gm));
         demonstrateWeightComparison(1.0, WeightUnit.TONNE, 1000.0, WeightUnit.KILOGRAM);
         demonstrateWeightConversion(10.0, WeightUnit.KILOGRAM, WeightUnit.GRAM);
 
-        demonstrateWeightAddition(new Quentity<WeightUnit>(2.0, WeightUnit.POUND), new Quentity<WeightUnit>(1.0, WeightUnit.TONNE));
-        demonstrateWeightAddition(new Quentity<WeightUnit>(2000.0, WeightUnit.GRAM), new Quentity<WeightUnit>(1.0, WeightUnit.TONNE), WeightUnit.KILOGRAM);
+        demonstrateWeightAddition(new Quentity<>(2.0, WeightUnit.POUND), new Quentity<>(1.0, WeightUnit.TONNE));
+        demonstrateWeightAddition(new Quentity<>(2000.0, WeightUnit.GRAM), new Quentity<>(1.0, WeightUnit.TONNE), WeightUnit.KILOGRAM);
 
     }
 
@@ -119,7 +119,7 @@ public class QuantityMeasurementApp {
     @Param -conversion target unit
      */
     private static void demonstrateWeightConversion(double v, WeightUnit weightUnit, WeightUnit trgWeightUnit) {
-        Quentity<WeightUnit> convertedWeight = demonstrateWeightConversion(new Quentity<WeightUnit>(v, weightUnit), trgWeightUnit);
+        Quentity<WeightUnit> convertedWeight = demonstrateWeightConversion(new Quentity<>(v, weightUnit), trgWeightUnit);
         System.out.println("Converted weight = "+convertedWeight.toString());
     }
 
@@ -181,7 +181,7 @@ public class QuantityMeasurementApp {
     }
 
     public static Quentity<LengthUnit> demonstrateLengthConversion(double value, LengthUnit lengthUnitSrc, LengthUnit lengthUnitTrg) {
-        Quentity<LengthUnit> ft = new Quentity<LengthUnit>(value,lengthUnitSrc);
+        Quentity<LengthUnit> ft = new Quentity<>(value,lengthUnitSrc);
         Quentity<LengthUnit> lt=demonstrateLengthConversion(ft, lengthUnitTrg);
         System.out.println(lt.toString());
 
@@ -189,18 +189,18 @@ public class QuantityMeasurementApp {
     }
 
     public static Quentity<LengthUnit> demonstrateLengthConversion(Quentity<LengthUnit> ft, LengthUnit lengthUnitTrg) {
-        return new Quentity<LengthUnit>(lengthUnitTrg.convertFromBaseUnit(ft.getUnit().convertToBaseUnit(ft.getValue())), lengthUnitTrg);
+        return new Quentity<>(lengthUnitTrg.convertFromBaseUnit(ft.getUnit().convertToBaseUnit(ft.getValue())), lengthUnitTrg);
     }
 
     public static boolean demonstrateLengthComparison(double value1, LengthUnit lengthUnit1, double value2, LengthUnit lengthUnit2) {
-        boolean rs= demonstrateLengthEqulity(new Quentity<LengthUnit>(value1,lengthUnit1),new Quentity<LengthUnit>(value2,lengthUnit2));
+        boolean rs= demonstrateLengthEqulity(new Quentity<>(value1,lengthUnit1),new Quentity<>(value2,lengthUnit2));
         System.out.println(rs);
         return rs;
     }
 
     private static void demonstrateFeetInchesComparison() {
-        Quentity<LengthUnit> ft = new Quentity<LengthUnit>(2.0,LengthUnit.FEET);
-        Quentity<LengthUnit> in = new Quentity<LengthUnit>(24.0,LengthUnit.INCHES);
+        Quentity<LengthUnit> ft = new Quentity<>(2.0,LengthUnit.FEET);
+        Quentity<LengthUnit> in = new Quentity<>(24.0,LengthUnit.INCHES);
 
         System.out.println("Feet equals inches = "+ demonstrateLengthEqulity(ft,in));
     }
