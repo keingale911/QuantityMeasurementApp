@@ -9,6 +9,9 @@ public class Quentity<U extends IMeasurable> {
     private U unit;
 
     public Quentity(double value, U unit) {
+        if(unit == null){
+            throw new IllegalArgumentException("Unit can't be null");
+        }
         this.unit = unit;
         this.value = value;
     }
@@ -48,13 +51,14 @@ public class Quentity<U extends IMeasurable> {
     }
 
     public static void main(String[] args) {
-        Quentity<LengthUnit> ft = new Quentity<>(2.0,LengthUnit.FEET);
+        Quentity<LengthUnit> ft = new Quentity<>(1.0,LengthUnit.FEET);
+        Quentity<LengthUnit> ft1 = new Quentity<>(2.0,LengthUnit.FEET);
         Quentity<LengthUnit> in = new Quentity<>(12.0,LengthUnit.INCHES);
 
-        System.out.println(ft.convertTo(LengthUnit.CENTIMETER));
-        System.out.println(ft.add(in));
-        System.out.println(ft.add(in,LengthUnit.YARD));
-        System.out.println(ft.equals(in));
+        System.out.println("1 feet in centimeter is = "+ft.convertTo(LengthUnit.CENTIMETER));
+        System.out.println("Addition of 2 units = "+ft.add(in));
+        System.out.println("Add 2 units and converted = "+ft1.add(in,LengthUnit.YARD));
+        System.out.println("Is 2 units are equals = "+ft.equals(in));
     }
 
     @Override
@@ -74,5 +78,9 @@ public class Quentity<U extends IMeasurable> {
     public boolean compare(Quentity<U> that) {
         return Double.compare(this.getUnit().convertToBaseUnit(this.getValue()),
                 that.getUnit().convertToBaseUnit(that.getValue())) == 0;
+    }
+
+    public Quentity<U> addAndConvert(Quentity<U> that, U trgUnit) {
+        return add(that, trgUnit);
     }
 }

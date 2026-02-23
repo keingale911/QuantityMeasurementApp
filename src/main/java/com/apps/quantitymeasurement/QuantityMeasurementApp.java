@@ -2,8 +2,7 @@ package main.java.com.apps.quantitymeasurement;
 
 import main.java.com.apps.quantitymeasurement.constants.LengthUnit;
 import main.java.com.apps.quantitymeasurement.constants.WeightUnit;
-import main.java.com.apps.quantitymeasurement.service.Length;
-import main.java.com.apps.quantitymeasurement.service.Weight;
+import main.java.com.apps.quantitymeasurement.service.Quentity;
 
 public class QuantityMeasurementApp {
 
@@ -63,7 +62,7 @@ public class QuantityMeasurementApp {
 
     public static void main(String[] args) {
 
-        //Length operations
+        //Quentity<LengthUnit> operations
         demonstrateInchesEqulity();
         demonstrateFeetEqulity();
         demonstrateFeetInchesComparison();
@@ -76,41 +75,41 @@ public class QuantityMeasurementApp {
 
         demonstrateLengthConversion(3.281,LengthUnit.FEET,LengthUnit.CENTIMETER);
 
-        demonstrateLengthAddition(new Length(1.0, LengthUnit.FEET),new Length(12.0, LengthUnit.INCHES));
+        demonstrateLengthAddition(new Quentity<LengthUnit>(1.0, LengthUnit.FEET),new Quentity<LengthUnit>(12.0, LengthUnit.INCHES));
 
-        demonstrateLengthAddition(new Length(2.0, LengthUnit.FEET),new Length(12.0, LengthUnit.INCHES),LengthUnit.YARD);
+        demonstrateLengthAddition(new Quentity<LengthUnit>(2.0, LengthUnit.FEET),new Quentity<LengthUnit>(12.0, LengthUnit.INCHES),LengthUnit.YARD);
 
-        //Weight Operations UC9
-        Weight kg = new Weight(1.0, WeightUnit.KILOGRAM);
-        Weight gm = new Weight(1000.0, WeightUnit.GRAM);
+        //Quentity<WeightUnit> Operations UC9
+        Quentity<WeightUnit> kg = new Quentity<WeightUnit>(1.0, WeightUnit.KILOGRAM);
+        Quentity<WeightUnit> gm = new Quentity<WeightUnit>(1000.0, WeightUnit.GRAM);
 
-        System.out.println("Is 1 kg == 1000 gm = "+demonstrateWeightEqulity(kg, gm));
+        System.out.println("Is 1 kg == 1000 gm generic check ..............= "+demonstrateWeightEqulity(kg, gm));
         demonstrateWeightComparison(1.0, WeightUnit.TONNE, 1000.0, WeightUnit.KILOGRAM);
         demonstrateWeightConversion(10.0, WeightUnit.KILOGRAM, WeightUnit.GRAM);
 
-        demonstrateWeightAddition(new Weight(2.0, WeightUnit.POUND), new Weight(1.0, WeightUnit.TONNE));
-        demonstrateWeightAddition(new Weight(2000.0, WeightUnit.GRAM), new Weight(1.0, WeightUnit.TONNE), WeightUnit.KILOGRAM);
+        demonstrateWeightAddition(new Quentity<WeightUnit>(2.0, WeightUnit.POUND), new Quentity<WeightUnit>(1.0, WeightUnit.TONNE));
+        demonstrateWeightAddition(new Quentity<WeightUnit>(2000.0, WeightUnit.GRAM), new Quentity<WeightUnit>(1.0, WeightUnit.TONNE), WeightUnit.KILOGRAM);
 
     }
 
-    /*Addition of two weigth and default converter into first Weight unit
-    @Param -Weight first Weight
+    /*Addition of two weigth and default converter into first Quentity<WeightUnit> unit
+    @Param -Quentity<WeightUnit> first Quentity<WeightUnit>
     @Param -weight second weight1
     @Param -WeightUnit e.i result of addition in which unit converting into
      */
-    public static Weight demonstrateWeightAddition(Weight weight, Weight weight1, WeightUnit weightUnitTrg) {
-        Weight convertedAdd = weight.addAndConvert(weight1, weightUnitTrg);
-        System.out.println("Addition of 2 weight and converted = "+convertedAdd.toString());
+    public static Quentity<WeightUnit> demonstrateWeightAddition(Quentity<WeightUnit> weight, Quentity<WeightUnit> weight1, WeightUnit weightUnitTrg) {
+        Quentity<WeightUnit> convertedAdd = weight.addAndConvert(weight1, weightUnitTrg);
+        System.out.println("Addition of 2 weight and converted in Generic = "+convertedAdd.toString());
         return convertedAdd;
     }
 
-    /*Addition of two weight and default converter into first Weight unit
-    @Param -Weight first Weight in which we are getting result
+    /*Addition of two weight and default converter into first Quentity<WeightUnit> unit
+    @Param -Quentity<WeightUnit> first Quentity<WeightUnit> in which we are getting result
     @Param -weight second weight
      */
-    public static Weight demonstrateWeightAddition(Weight weight1, Weight weight2) {
-        Weight add = weight1.add(weight2);
-        System.out.println(add.toString());
+    public static Quentity<WeightUnit> demonstrateWeightAddition(Quentity<WeightUnit> weight1, Quentity<WeightUnit> weight2) {
+        Quentity<WeightUnit> add = weight1.add(weight2);
+        System.out.println("addition with Generic = "+add.toString());
         return add;
     }
 
@@ -120,17 +119,17 @@ public class QuantityMeasurementApp {
     @Param -conversion target unit
      */
     private static void demonstrateWeightConversion(double v, WeightUnit weightUnit, WeightUnit trgWeightUnit) {
-        Weight convertedWeight = demonstrateWeightConversion(new Weight(v, weightUnit), trgWeightUnit);
+        Quentity<WeightUnit> convertedWeight = demonstrateWeightConversion(new Quentity<WeightUnit>(v, weightUnit), trgWeightUnit);
         System.out.println("Converted weight = "+convertedWeight.toString());
     }
 
     /*this method is calling to unit conversion
     @Param -weight to pass current weight value
     @Param -WeightUnit as target unit
-    @Return -Weight returning converted weight
+    @Return -Quentity<WeightUnit> returning converted weight
      */
-    public static Weight demonstrateWeightConversion(Weight weight, WeightUnit trgWeightUnit) {
-        return new Weight(trgWeightUnit.convertFromBaseUnit(weight.weightUnit.convertToBaseUnit(weight.value)), trgWeightUnit);
+    public static Quentity<WeightUnit> demonstrateWeightConversion(Quentity<WeightUnit> weight, WeightUnit trgWeightUnit) {
+        return new Quentity<WeightUnit>(trgWeightUnit.convertFromBaseUnit(weight.getUnit().convertToBaseUnit(weight.getValue())), trgWeightUnit);
     }
 
     /* here we are checking 2 weight
@@ -140,7 +139,7 @@ public class QuantityMeasurementApp {
     @Param -second weight unit
      */
     private static void demonstrateWeightComparison(double v, WeightUnit weightUnit, double v1, WeightUnit weightUnit1) {
-        System.out.println("Here we are checking the two weights are equals or not = "+demonstrateWeightEqulity(new Weight(v, weightUnit),new Weight(v1, weightUnit1)));
+        System.out.println("Here we are checking the two weights are equals or not = "+demonstrateWeightEqulity(new Quentity<WeightUnit>(v, weightUnit),new Quentity<WeightUnit>(v1, weightUnit1)));
     }
 
     /* check two weight units and return boolean
@@ -148,11 +147,11 @@ public class QuantityMeasurementApp {
     @Param -Second weight unit
     @Return -true if both are equals otherwise false
      */
-    private static boolean demonstrateWeightEqulity(Weight kg, Weight gm) {
+    private static boolean demonstrateWeightEqulity(Quentity<WeightUnit> kg, Quentity<WeightUnit> gm) {
         return kg.equals(gm);
     }
 
-    //functions for Length operations
+    //functions for Quentity<LengthUnit> operations
     public static void demonstrateInchesEqulity() {
         Inches f1 = new Inches(24.0);
         Inches f2 = new Inches(11.5);
@@ -167,46 +166,46 @@ public class QuantityMeasurementApp {
         System.out.println(f3.equals(ft));
     }
 
-    public static Length demonstrateLengthAddition(Length length, Length secondLength, LengthUnit targetUnit) {
-        Length convertedAdd = length.addAndConvert(secondLength,targetUnit);
+    public static Quentity<LengthUnit> demonstrateLengthAddition(Quentity<LengthUnit> length, Quentity<LengthUnit> secondLength, LengthUnit targetUnit) {
+        Quentity<LengthUnit> convertedAdd = length.addAndConvert(secondLength,targetUnit);
         System.out.println("Addition of 2 length values in target Unit = "+convertedAdd.toString());
         return convertedAdd;
     }
 
-    public static Length demonstrateLengthAddition(Length length, Length that) {
+    public static Quentity<LengthUnit> demonstrateLengthAddition(Quentity<LengthUnit> length, Quentity<LengthUnit> that) {
 
-        Length sumLength= length.add(that);
+        Quentity<LengthUnit> sumLength= length.add(that);
         System.out.println("Addition of 2 length values............ = "+sumLength.add(that).toString());
 
         return sumLength;
     }
 
-    public static Length demonstrateLengthConversion(double value, LengthUnit lengthUnitSrc, LengthUnit lengthUnitTrg) {
-        Length ft = new Length(value,lengthUnitSrc);
-        Length lt=demonstrateLengthConversion(ft, lengthUnitTrg);
+    public static Quentity<LengthUnit> demonstrateLengthConversion(double value, LengthUnit lengthUnitSrc, LengthUnit lengthUnitTrg) {
+        Quentity<LengthUnit> ft = new Quentity<LengthUnit>(value,lengthUnitSrc);
+        Quentity<LengthUnit> lt=demonstrateLengthConversion(ft, lengthUnitTrg);
         System.out.println(lt.toString());
 
         return lt;
     }
 
-    public static Length demonstrateLengthConversion(Length ft, LengthUnit lengthUnitTrg) {
-        return new Length(lengthUnitTrg.convertFromBaseUnit(ft.lengthUnit.convertToBaseUnit(ft.value)), lengthUnitTrg);
+    public static Quentity<LengthUnit> demonstrateLengthConversion(Quentity<LengthUnit> ft, LengthUnit lengthUnitTrg) {
+        return new Quentity<LengthUnit>(lengthUnitTrg.convertFromBaseUnit(ft.getUnit().convertToBaseUnit(ft.getValue())), lengthUnitTrg);
     }
 
     public static boolean demonstrateLengthComparison(double value1, LengthUnit lengthUnit1, double value2, LengthUnit lengthUnit2) {
-        boolean rs= demonstrateLengthEqulity(new Length(value1,lengthUnit1),new Length(value2,lengthUnit2));
+        boolean rs= demonstrateLengthEqulity(new Quentity<LengthUnit>(value1,lengthUnit1),new Quentity<LengthUnit>(value2,lengthUnit2));
         System.out.println(rs);
         return rs;
     }
 
     private static void demonstrateFeetInchesComparison() {
-        Length ft = new Length(2.0,LengthUnit.FEET);
-        Length in = new Length(24.0,LengthUnit.INCHES);
+        Quentity<LengthUnit> ft = new Quentity<LengthUnit>(2.0,LengthUnit.FEET);
+        Quentity<LengthUnit> in = new Quentity<LengthUnit>(24.0,LengthUnit.INCHES);
 
         System.out.println("Feet equals inches = "+ demonstrateLengthEqulity(ft,in));
     }
 
-    public static boolean demonstrateLengthEqulity(Length ft, Length in) {
+    public static boolean demonstrateLengthEqulity(Quentity<LengthUnit> ft, Quentity<LengthUnit> in) {
         return ft.equals(in);
     }
 }
