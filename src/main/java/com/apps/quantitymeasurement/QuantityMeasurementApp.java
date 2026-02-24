@@ -19,9 +19,8 @@ public class QuantityMeasurementApp {
 
             if (this == obj) return true;
             if (this == null) return false;
-            if (!(obj instanceof Feet)) return false;
+            if (!(obj instanceof Feet other)) return false;
 
-            Feet other = (Feet) obj;
             return Double.compare(this.value, other.value) == 0;
         }
     }

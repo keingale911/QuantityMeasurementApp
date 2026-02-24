@@ -1,6 +1,7 @@
 package main.java.com.apps.quantitymeasurement.service;
 
 import main.java.com.apps.quantitymeasurement.constants.LengthUnit;
+import main.java.com.apps.quantitymeasurement.constants.VolumeUnit;
 
 import java.util.Objects;
 
@@ -13,8 +14,7 @@ import java.util.Objects;
  */
 public class Quentity<U extends IMeasurable> {
     private double value;
-    private U unit;
-
+    private final U unit;
 
     /*
       Quantity constructor with a value and its unit.
@@ -22,7 +22,6 @@ public class Quentity<U extends IMeasurable> {
       @param unit  the unit for this value and unit must not be null
       @throws IllegalArgumentException if unit is null
      */
-
     public Quentity(double value, U unit) {
         if(unit == null){
             throw new IllegalArgumentException("Unit can't be null");
@@ -93,6 +92,10 @@ public class Quentity<U extends IMeasurable> {
         System.out.println("Addition of 2 units = "+ft.add(in));
         System.out.println("Add 2 units and converted = "+ft1.add(in,LengthUnit.YARD));
         System.out.println("Is 2 units are equals = "+ft.equals(in));
+
+        Quentity<VolumeUnit> lr = new Quentity<>(1.0,VolumeUnit.LITRE);
+        Quentity<VolumeUnit> ml = new Quentity<>(1000.0,VolumeUnit.MILLILITRE);
+        System.out.println("Is 2 valume units are equals = "+lr.add(ml));
     }
 
     //Check if two quantities are equal by comparing their base-unit values.
